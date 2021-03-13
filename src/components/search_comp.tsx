@@ -1,17 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SelectSearch, { SelectSearchOption } from "react-select-search";
 import BOOKS from "../assets/csv_options.json";
 import ReaderImg from "./img_comp";
+import { useLocation, useHistory } from "react-router-dom";
+import BookSelections from "./book_select_comp";
 
-const NUM_REQUIRED = 3;
+function shuffle(array: SelectSearchOption[]) {
+	for (let i = array.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[array[i], array[j]] = [array[j], array[i]];
+	}
+	return array;
+}
 
 const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 	const books = BOOKS as SelectSearchOption[];
+	const history = useHistory();
+	const location = useLocation();
 
 	const [selectedBooks, setSelectedBooks] = useState<SelectSearchOption[]>([]);
 
+	const handleGenerateReadingList = async () => {
+		// TODO: actually generate reading list
+		await setMyList(selectedBooks);
+		if (location.pathname !== "/mylist") {
+			history.push({
+				pathname: "/mylist"
+			});
+		}
+	};
+
 	const getBooks = async (query: string): Promise<SelectSearchOption[]> => {
-		return books.length > 0 ? books.slice(0, 15) : [];
+		return books.length > 0 ? books.slice(0, 15) : []; //shuffle(books)
 	};
 
 	const renderBook = (props, option, snapshot, className: string) => {
@@ -23,7 +43,7 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 				key={option.name + "-but"}
 			>
 				<span className="align-middle">
-					<span className="flex flex-col pl-14 sm:pl-0">
+					<span className="flex flex-col pl-14 sm:pl-4">
 						<img
 							key={option.name + "-img"}
 							alt="book-cover"
@@ -48,7 +68,7 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 	const getClassNames = (key: string): string => {
 		switch (key) {
 			case "input":
-				return "outline-none border-none bg-indigo-100 p-5 text-base md:text-lg w-11/12 md:w-6/12 rounded-md mb-2 focus:ring-2 focus:ring-indigo-300"; //  text-green-700
+				return "outline-none border-none bg-indigo-100 p-5 text-base md:text-lg w-11/12 md:w-6/12 rounded-md mb-2 focus:ring-2 focus:ring-indigo-300";
 			case "option":
 				return "bg-white pl-0 pb-1 h-20 w-11/12 md:w-6/12 rounded-md hover:bg-yellow-100 m-auto relative mb-1";
 			case "options":
@@ -81,7 +101,6 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 	};
 
 	const onChange = (value: any) => {
-		// console.log(value);
 		var newValue = books.find(book => book.value === value);
 		if (newValue !== undefined && !selectedBooks.includes(newValue)) {
 			setSelectedBooks([...selectedBooks, newValue]);
@@ -92,6 +111,7 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 	return (
 		<div className="text-center bg-indigo-50">
 			<BookSelections
+				handleGenerateReadingList={handleGenerateReadingList}
 				setSelectedBooks={setSelectedBooks}
 				selectedBooks={selectedBooks}
 			/>
@@ -116,45 +136,3 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 	);
 };
 export default SearchComp;
-
-const BookSelections = ({
-	selectedBooks,
-	setSelectedBooks
-}: {
-	selectedBooks: SelectSearchOption[];
-	setSelectedBooks: Function;
-}) => {
-	const removeSelectedBook = (book: SelectSearchOption) => {
-		setSelectedBooks(
-			selectedBooks.filter(selected => {
-				return book !== selected;
-			})
-		);
-	};
-
-	return (
-		<div className="mb-8 bg-indigo-300 w-screen flex items-center h-24">
-			{selectedBooks.map((book, index) => {
-				return (
-					<button
-						className="h-full border-none outline-none focus:outline-none focus:border-0 "
-						onClick={() => removeSelectedBook(book)}
-					>
-						<img
-							src={book.photo}
-							alt="book-cover"
-							className="h-full "
-							title={book.name}
-						/>
-					</button>
-				);
-			})}
-			{selectedBooks.length >= NUM_REQUIRED ? (
-				<button className="rounded-md px-6 h-14 bg-indigo-400 text-md md:text-lg text-gray-50 m-auto font-bold float-right focus:outline-none focus:border-0 mr-5 self-center">
-					Generate Reading List
-				</button>
-			) : null}
-		</div>
-	);
-};
-export { BookSelections };
