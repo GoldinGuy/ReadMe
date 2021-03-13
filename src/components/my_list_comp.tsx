@@ -4,8 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faDownload,
 	faExternalLinkAlt,
-	faShare,
-	faShareAlt
+	faShare
 } from "@fortawesome/free-solid-svg-icons";
 
 const MyListComp = ({ myList }: { myList: SelectSearchOption[] }) => {
@@ -28,7 +27,7 @@ const MyListComp = ({ myList }: { myList: SelectSearchOption[] }) => {
 			</div>
 			{myList.map((book, index) => {
 				return (
-					<button className="bg-white pl-0 h-20 w-11/12 md:w-6/12 rounded-md hover:bg-indigo-100 m-auto relative mb-1 focus:outline-none focus:border-0 grid ">
+					<button className="bg-white pl-0 h-20 w-11/12 md:w-6/12 rounded-md hover:bg-yellow-100 m-auto relative mb-1 focus:outline-none focus:border-0 grid ">
 						<span className="align-middle self-center">
 							<span className="flex flex-col pl-14 sm:pl-0 self-center">
 								<img

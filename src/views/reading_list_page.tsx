@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { SelectSearchOption } from "react-select-search";
 import { HeaderComp, SearchComp, MyListComp } from "../components";
 
 const ReadingListPage = () => {
+
+
+
+
 	const MYLIST = [
 		{
 			name: "The Hunger Games",
@@ -69,7 +73,7 @@ const ReadingListPage = () => {
 			{location.pathname === "/mylist" ? (
 				<MyListComp myList={MYLIST} />
 			) : (
-				<SearchComp />
+				<SearchComp setMyList={setMyList} />
 			)}
 		</div>
 	);

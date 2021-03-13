@@ -9,21 +9,14 @@ const HeaderComp = () => {
 			<div>
 				<header className="z-30 w-full px-2 py-4 bg-indigo-400 sm:px-4">
 					<div className="container flex items-center justify-between mx-auto">
-						<a href="/" className="flex items-center">
+						<Link to="/" className="flex items-center">
 							<img src={logo} alt="logo" className="h-10" draggable="false" />
 							<strong className="text-gray-100 pl-4 text-lg">
 								ReadingList
 							</strong>
-						</a>
+						</Link>
 						<div className="flex items-center space-x-1">
 							<div className="hidden space-x-1 md:inline-flex">
-								<Link
-									to="/"
-									href="#"
-									className="text-gray-200 btn btn-sm btn-link "
-								>
-									Home
-								</Link>
 								<Link
 									to="/mylist"
 									href="#"
@@ -38,13 +31,14 @@ const HeaderComp = () => {
 								>
 									View Code
 								</Link>
-								<Link
-									to=""
+								<a
+									href="https://github.com/GoldinGuy/"
 									target="_blank"
-									className="text-gray-200 btn btn-sm btn-link"
+									rel="noreferrer"
+									className="text-yellow-400 btn btn-sm btn-link font-bold"
 								>
 									@GoldinGuy
-								</Link>
+								</a>
 							</div>
 						</div>
 					</div>

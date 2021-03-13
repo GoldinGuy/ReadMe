@@ -5,17 +5,8 @@ import ReaderImg from "./img_comp";
 
 const NUM_REQUIRED = 3;
 
-const SearchComp = () => {
+const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 	const books = BOOKS as SelectSearchOption[];
-	// const [books, setBooks] = useState<SelectSearchOption[]>([]);
-
-	// useEffect(() => {
-	// 	if (books.length === 0) {
-	// 		import("../assets/csv_options.json").then(BOOKS => {
-	// 			setBooks(BOOKS as SelectSearchOption[]);
-	// 		});
-	// 	}
-	// });
 
 	const [selectedBooks, setSelectedBooks] = useState<SelectSearchOption[]>([]);
 
