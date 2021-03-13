@@ -28,15 +28,18 @@ const SearchComp = () => {
 				type="button"
 				key={option.name + "-but"}
 			>
-				<span className="align-middle ">
-					<span className="flex flex-col">
+				<span className="align-middle">
+					<span className="flex flex-col pl-14 sm:pl-0">
 						<img
 							key={option.name + "-img"}
 							alt="book-cover"
 							className="h-20 w-14 float-left top-0 left-0 rounded-md absolute"
 							src={option.photo}
 						/>
-						<span className="text-lg" key={option.name + "-title"}>
+						<span
+							className="text-base md:text-lg "
+							key={option.name + "-title"}
+						>
 							{option.name}
 						</span>
 						<span className="text-sm" key={option.name + "-author"}>
@@ -51,9 +54,9 @@ const SearchComp = () => {
 	const getClassNames = (key: string): string => {
 		switch (key) {
 			case "input":
-				return "outline-none border-none bg-indigo-100 p-5 text-lg w-6/12 rounded-md mb-2"; //  text-indigo-700
+				return "outline-none border-none bg-indigo-100 p-5 text-base md:text-lg w-11/12 md:w-6/12 rounded-md mb-2"; //  text-indigo-700
 			case "option":
-				return "bg-gray-50 pl-0 pb-1 h-20 w-6/12 rounded-md hover:bg-yellow-300 m-auto relative mb-1";
+				return "bg-gray-50 pl-0 pb-1 h-20 w-11/12 md:w-6/12 rounded-md hover:bg-yellow-300 m-auto relative mb-1";
 			case "options":
 				return "";
 			case "container":
