@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import logo from "../assets/img/512.png";
 import img from "../assets/img/girl.png";
 
+
+
 const HeaderComp = () => {
 	return (
 		<>
@@ -20,7 +22,7 @@ const HeaderComp = () => {
 								<Link
 									to="/"
 									href="#"
-									className="text-gray-200 btn btn-sm btn-link"
+									className="text-gray-200 btn btn-sm btn-link "
 								>
 									Home
 								</Link>

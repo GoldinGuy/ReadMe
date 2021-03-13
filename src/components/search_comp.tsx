@@ -3,6 +3,8 @@ import SelectSearch, { SelectSearchOption } from "react-select-search";
 import BOOKS from "../assets/csv_options.json";
 import ReaderImg from "./img_comp";
 
+const NUM_REQUIRED = 3;
+
 const SearchComp = () => {
 	const books = BOOKS as SelectSearchOption[];
 	// const [books, setBooks] = useState<SelectSearchOption[]>([]);
@@ -156,7 +158,7 @@ const BookSelections = ({
 					</button>
 				);
 			})}
-			{selectedBooks.length >= 2 ? (
+			{selectedBooks.length >= NUM_REQUIRED ? (
 				<button className="rounded-md px-6 h-14 bg-yellow-400 text-md md:text-lg text-gray-50 m-auto font-bold float-right focus:outline-none focus:border-0 mr-5 self-center">
 					Generate Reading List
 				</button>
