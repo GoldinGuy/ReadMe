@@ -3,7 +3,7 @@ import { HeaderComp, SearchComp } from "../components";
 
 const ReadingListPage = () => {
 	return (
-		<div className="bg-amber-50 h-screen">
+		<div className="bg-indigo-50 h-screen">
 			<HeaderComp />
 			<SearchComp />
 		</div>
