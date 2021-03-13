@@ -1,6 +1,5 @@
 import { useState } from "react";
 import SelectSearch, { SelectSearchOption } from "react-select-search";
-// import books from "../assets/csvJson.json";
 import BOOKS from "../assets/csv_options.json";
 
 const SearchComp = () => {
@@ -8,21 +7,6 @@ const SearchComp = () => {
 
 	const [selectedBooks, setSelectedBooks] = useState<string[]>([]);
 
-	// const getBooks = () => {
-	// 	var book_list: any = [];
-	// 	console.log(books);
-	// 	for (let i in books) {
-	// 		console.log(books[i]);
-	// 		var newBook = books[i];
-	// 		book_list.push({
-	// 			name: newBook["original_title"] ?? "",
-	// 			value: newBook["original_title"] ?? "",
-	// 			photo: newBook["small_image_url"] ?? "",
-	// 			author: newBook["authors"] ?? ""
-	// 		});
-	// 	}
-	// 	return book_list;
-	// };
 	const getBooks = async (query: string): Promise<SelectSearchOption[]> => {
 		return books.slice(0, 15);
 	};
@@ -59,10 +43,6 @@ const SearchComp = () => {
 				return "";
 		}
 	};
-
-	// const getOptions = async (query: string): Promise<SelectSearchOption[]> => {
-	// 	return Books;
-	// };
 
 	const filterOptions = (options: SelectSearchOption[]) => (
 		query: string
