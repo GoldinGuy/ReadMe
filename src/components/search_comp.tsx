@@ -14,7 +14,7 @@ const SearchComp = () => {
 	// 	}
 	// });
 
-	const [selectedBooks, setSelectedBooks] = useState<string[]>([]);
+	const [selectedBooks, setSelectedBooks] = useState<SelectSearchOption[]>([]);
 
 	const getBooks = async (query: string): Promise<SelectSearchOption[]> => {
 		return books.length > 0 ? books.slice(0, 15) : [];
@@ -54,7 +54,7 @@ const SearchComp = () => {
 	const getClassNames = (key: string): string => {
 		switch (key) {
 			case "input":
-				return "outline-none border-none bg-indigo-100 p-5 text-base md:text-lg w-11/12 md:w-6/12 rounded-md mb-2"; //  text-indigo-700
+				return "outline-none border-none bg-indigo-100 p-5 text-base md:text-lg w-11/12 md:w-6/12 rounded-md mb-2 focus:ring-2 focus:ring-indigo-300"; //  text-indigo-700
 			case "option":
 				return "bg-gray-50 pl-0 pb-1 h-20 w-11/12 md:w-6/12 rounded-md hover:bg-yellow-300 m-auto relative mb-1";
 			case "options":
@@ -75,7 +75,7 @@ const SearchComp = () => {
 					if (book.name.length > 0) {
 						return (
 							book.name.toLowerCase().includes(query.toLowerCase()) &&
-							!selectedBooks.includes(book.name)
+							!selectedBooks.includes(book)
 						);
 					}
 					return false;
@@ -87,15 +87,31 @@ const SearchComp = () => {
 	};
 
 	const onChange = (value: any) => {
-		if (!selectedBooks.includes(value)) {
-			setSelectedBooks([...selectedBooks, value]);
+		// console.log(value);
+		var newValue = books.find(book => book.value === value);
+		if (newValue !== undefined && !selectedBooks.includes(newValue)) {
+			setSelectedBooks([...selectedBooks, newValue]);
 			console.log(selectedBooks);
 		}
 	};
 
 	return (
-		<div className="text-center bg-indigo-50 mt-10">
-			{selectedBooks}
+		<div className="text-center bg-indigo-50 mt-5">
+			<div className="flex inline justify-evenly mb-5">
+				{selectedBooks.map(book => {
+					return (
+						<>
+							<img
+								src={book.photo}
+								alt="book-cover"
+								className="rounded-md h-24 w-16"
+							/>
+							{/* {book.name} */}
+						</>
+					);
+				})}
+			</div>
+
 			<SelectSearch
 				options={books}
 				search={true}
