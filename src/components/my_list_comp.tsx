@@ -1,18 +1,61 @@
 import React from "react";
 import { SelectSearchOption } from "react-select-search";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+	faDownload,
+	faExternalLinkAlt,
+	faShare,
+	faShareAlt
+} from "@fortawesome/free-solid-svg-icons";
 
 const MyListComp = ({ myList }: { myList: SelectSearchOption[] }) => {
 	return (
-		<div className="bg-indigo-50 h-screen">
+		<div className="bg-indigo-50 text-center py-10">
+			<div className="pb-10 md:text-lg">
+				<button
+					className=" rounded-md px-6 h-8 bg-indigo-400 text-md md:text-md text-gray-50 m-auto font-bold focus:outline-none focus:border-0 mr-5 self-center"
+					title="Share"
+				>
+					<FontAwesomeIcon icon={faShare} />
+				</button>
+				Your Reading List Has Been Generated!
+				<button
+					className="ml-4 rounded-md px-6 h-8 bg-indigo-400 text-md md:text-md text-gray-50 m-auto font-bold focus:outline-none focus:border-0 mr-5 self-center"
+					title="Download"
+				>
+					<FontAwesomeIcon icon={faDownload} />
+				</button>
+			</div>
 			{myList.map((book, index) => {
 				return (
-					<button className="h-full border-none outline-none focus:outline-none focus:border-0 ">
-						<img
-							src={book.photo}
-							alt="book-cover"
-							className="h-full "
-							title={book.name}
-						/>
+					<button className="bg-white pl-0 h-20 w-11/12 md:w-6/12 rounded-md hover:bg-indigo-100 m-auto relative mb-1 focus:outline-none focus:border-0 grid ">
+						<span className="align-middle self-center">
+							<span className="flex flex-col pl-14 sm:pl-0 self-center">
+								<img
+									key={book.name + "-img"}
+									alt="book-cover"
+									className="h-20 w-14 float-left top-0 left-0 rounded-md absolute"
+									src={book.photo}
+								/>
+								<span
+									className="text-base md:text-lg "
+									key={book.name + "-title"}
+								>
+									{book.name}
+								</span>
+								<span className="text-sm" key={book.name + "-author"}>
+									{book.type}
+								</span>
+							</span>
+						</span>
+						<a
+							className="float-right absolute right-0 top-6 mr-3 "
+							href={`https://www.goodreads.com/book/show/${book.value}`}
+							target="_blank"
+							rel="noreferrer"
+						>
+							<FontAwesomeIcon icon={faExternalLinkAlt} />
+						</a>
 					</button>
 				);
 			})}

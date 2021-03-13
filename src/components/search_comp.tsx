@@ -57,9 +57,9 @@ const SearchComp = () => {
 	const getClassNames = (key: string): string => {
 		switch (key) {
 			case "input":
-				return "outline-none border-none bg-indigo-100 p-5 text-base md:text-lg w-11/12 md:w-6/12 rounded-md mb-2 focus:ring-2 focus:ring-indigo-300"; //  text-indigo-700
+				return "outline-none border-none bg-indigo-100 p-5 text-base md:text-lg w-11/12 md:w-6/12 rounded-md mb-2 focus:ring-2 focus:ring-indigo-300"; //  text-green-700
 			case "option":
-				return "bg-gray-50 pl-0 pb-1 h-20 w-11/12 md:w-6/12 rounded-md hover:bg-yellow-300 m-auto relative mb-1";
+				return "bg-white pl-0 pb-1 h-20 w-11/12 md:w-6/12 rounded-md hover:bg-yellow-100 m-auto relative mb-1";
 			case "options":
 				return "";
 			case "container":
@@ -159,7 +159,7 @@ const BookSelections = ({
 				);
 			})}
 			{selectedBooks.length >= NUM_REQUIRED ? (
-				<button className="rounded-md px-6 h-14 bg-yellow-400 text-md md:text-lg text-gray-50 m-auto font-bold float-right focus:outline-none focus:border-0 mr-5 self-center">
+				<button className="rounded-md px-6 h-14 bg-indigo-400 text-md md:text-lg text-gray-50 m-auto font-bold float-right focus:outline-none focus:border-0 mr-5 self-center">
 					Generate Reading List
 				</button>
 			) : null}

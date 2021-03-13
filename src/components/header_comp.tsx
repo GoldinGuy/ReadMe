@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import logo from "../assets/img/512.png";
 import img from "../assets/img/girl.png";
 
-
-
 const HeaderComp = () => {
 	return (
 		<>
