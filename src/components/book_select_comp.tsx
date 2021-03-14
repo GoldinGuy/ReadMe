@@ -20,7 +20,7 @@ const BookSelections = ({
 	};
 
 	return (
-		<div className="mb-8 bg-indigo-300 w-screen flex items-center h-24">
+		<div className="mb-8 bg-indigo-300 w-screen flex items-center h-24 overflow-x-hidden">
 			{selectedBooks.map((book, index) => {
 				return (
 					<button

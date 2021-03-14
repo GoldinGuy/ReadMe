@@ -47,7 +47,10 @@ var book_list = [];
 for (let obj of csvJson) {
 	console.log(obj);
 	book_list.push({
-		name: obj["original_title,"] ?? "",
+		name:
+			(obj["original_title,"] ?? "").length > 0
+				? obj["original_title,"]
+				: obj["title,"],
 		value: obj["best_book_id,"] ?? "",
 		photo: obj["small_image_url"] ?? "",
 		type: obj["authors,"] ?? ""

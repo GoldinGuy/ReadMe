@@ -7,7 +7,7 @@ const HeaderComp = () => {
 	return (
 		<>
 			<div>
-				<header className="z-30 w-full px-2 py-4 bg-indigo-400 sm:px-4">
+				<header className="z-30 w-full px-2 py-4 sm:px-4 bg-indigo-400">
 					<div className="container flex items-center justify-between mx-auto">
 						<Link to="/" className="flex items-center">
 							<img src={logo} alt="logo" className="h-10" draggable="false" />

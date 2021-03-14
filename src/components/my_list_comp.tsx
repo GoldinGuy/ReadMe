@@ -9,10 +9,10 @@ import {
 
 const MyListComp = ({ myList }: { myList: SelectSearchOption[] }) => {
 	return (
-		<div className="bg-indigo-50 text-center py-10">
-			<div className="pb-10 md:text-lg">
+		<div className="bg-indigo-50 text-center py-10 w-screen ">
+			<div className="pb-10 md:text-lg w-screen">
 				<button
-					className=" rounded-md px-6 h-8 bg-indigo-400 text-md md:text-md text-gray-50 m-auto font-bold focus:outline-none focus:border-0 mr-5 self-center"
+					className="rounded-md px-6 h-8 bg-indigo-400 text-md md:text-md text-gray-50 m-auto font-bold focus:outline-none focus:border-0 mr-5 self-center"
 					title="Share"
 				>
 					<FontAwesomeIcon icon={faShare} />
@@ -36,20 +36,26 @@ const MyListComp = ({ myList }: { myList: SelectSearchOption[] }) => {
 									className="h-20 w-14 float-left top-0 left-0 rounded-md absolute"
 									src={book.photo}
 								/>
-								<span
+								<a
+									href={`https://www.goodreads.com/book/show/${book.value}`}
+									target="_blank"
+									rel="noreferrer"
 									className="text-base md:text-lg "
 									key={book.name + "-title"}
 								>
 									{book.name}
-								</span>
+								</a>
 								<span className="text-sm" key={book.name + "-author"}>
 									{book.type}
 								</span>
 							</span>
 						</span>
+
 						<a
 							className="float-right absolute right-0 top-6 mr-3 "
-							href={`https://www.goodreads.com/book/show/${book.value}`}
+							href={`https://www.amazon.com/books/s?k=${encodeURIComponent(
+								book.name
+							)}+book`}
 							target="_blank"
 							rel="noreferrer"
 						>
