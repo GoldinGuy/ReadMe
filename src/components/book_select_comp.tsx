@@ -39,9 +39,9 @@ const BookSelections = ({
 			{selectedBooks.length >= NUM_REQUIRED ? (
 				<button
 					onClick={() => handleGenerateReadingList()}
-					className="rounded-md px-6 h-14 bg-greener-dark text-md md:text-lg text-gray-50 m-auto font-bold float-right focus:outline-none focus:border-0 mr-6 md:mr-10 self-center hover:bg-greener"
+					className="rounded-md px-1.5 sm:px-6 h-14 bg-greener-dark text-md md:text-lg text-gray-50 m-auto font-bold float-right focus:outline-none focus:border-0 mr-1 md:mr-10 self-center hover:bg-greener"
 				>
-					Generate Reading List
+					Generate List
 				</button>
 			) : null}
 		</div>

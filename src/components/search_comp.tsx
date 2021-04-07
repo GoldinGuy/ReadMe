@@ -160,7 +160,7 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 				<h2 className="text-3xl text-grayest font-bold">
 					Find books you'll enjoy!
 				</h2>
-				<p className="text-xl text-grayest mx-40 my-6">
+				<p className="text-xl text-grayest mx-8 sm:mx-28 md:mx-40 my-6">
 					Simply enter a few books you've read and enjoyed recently, and we'll
 					analyze over <strong>10000 books</strong> and{" "}
 					<strong>6 million ratings</strong> to determine some sweet selections
@@ -181,9 +181,9 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 				renderOption={renderBook}
 			/>
 
-			{/* <div className="m-auto mt-10 md:mt-20 md:mb-16">
+			<div className="m-auto mt-10 ">
 				<ReaderImg />
-			</div> */}
+			</div>
 		</div>
 	);
 };
