@@ -1,25 +1,22 @@
-const { green } = require("tailwindcss/colors");
-const colors = require("tailwindcss/colors");
-
 module.exports = {
 	purge: [],
 	darkMode: false, // or 'media' or 'class'
 	theme: {
-		colors: {
-			transparent: "transparent",
-			current: "currentColor",
-			black: colors.black,
-			white: colors.white,
-			gray: colors.coolGray,
-			lime: colors.lime,
-			green: colors.green,
-			emerald: colors.emerald,
-			amber: colors.amber,
-			yellow: colors.yellow,
-			lgreen: "colors.light-green",
-			indigo: colors.indigo
-		},
-		extend: {}
+		extend: {
+			colors: {
+				greener: {
+					lightest: "b7e4c7",
+					lighter: "#95d5b2",
+					light: "#74c69d",
+					DEFAULT: "#52b788",
+					dark: "#40916c",
+					darker: "#2d6a4f",
+					darkest: "#081c15"
+				},
+				grayer: "#F0F1F4",
+				grayest: "#333333"
+			}
+		}
 	},
 	variants: {
 		extend: {}

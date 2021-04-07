@@ -1,33 +1,74 @@
 import React, { useState } from "react";
 import SelectSearch, { SelectSearchOption } from "react-select-search";
-import BOOKS from "../assets/csv_options.json";
 import ReaderImg from "./img_comp";
-import { useLocation, useHistory } from "react-router-dom";
 import BookSelections from "./book_select_comp";
+// import * as tf from "@tensorflow/tfjs";
+// import book_idx from "../assets/weights/book_idx.json";
+// import idx_book from "../assets/weights/idx_book.json";
+// import weights from "../assets/weights/book_weights.json";
+import BOOKS from "../assets/new_books.json";
+import { multiply } from "mathjs";
 
-function shuffle(array: SelectSearchOption[]) {
-	for (let i = array.length - 1; i > 0; i--) {
-		const j = Math.floor(Math.random() * (i + 1));
-		[array[i], array[j]] = [array[j], array[i]];
-	}
-	return array;
-}
+// function shuffle(array: SelectSearchOption[]) {
+// 	for (let i = array.length - 1; i > 0; i--) {
+// 		const j = Math.floor(Math.random() * (i + 1));
+// 		[array[i], array[j]] = [array[j], array[i]];
+// 	}
+// 	return array;
+// }
+
+// function argSort(array) {
+// 	let decor = (v, i) => [v, i]; // set index to value
+// 	let undecor = a => a[1]; // leave only index
+// 	let argsort = arr => arr.map(decor).sort().map(undecor);
+// 	return argsort(array);
+// }
+
+// function generateReadingList(liked_books: SelectSearchOption[]) {
+// 	var reading_list_ids: number[] = [];
+// 	var reading_list: string[] = [];
+// 	// generate list of ids similar to liked books
+// 	for (let book of liked_books) {
+// 		// console.log(weights[book_idx[book.name]]);
+// 		var dists = multiply(weights, weights[book_idx[book.name]]);
+// 		var sorted_dists = argSort(dists);
+// 		var closest = sorted_dists.slice(
+// 			sorted_dists.length - 10,
+// 			sorted_dists.length
+// 		);
+// 		reading_list_ids.push(...closest);
+// 	}
+// 	reading_list_ids = reading_list_ids.sort().reverse();
+// 	// remove dups
+// 	reading_list_ids = reading_list_ids.filter((v, i, a) => a.indexOf(v) === i);
+// 	for (let b of reading_list_ids) {
+// 		if (!liked_books.includes(idx_book[b])) {
+// 			reading_list.push(idx_book[b]);
+// 		}
+// 	}
+// 	return reading_list.slice(reading_list.length - 6, reading_list.length);
+// }
 
 const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 	const books = BOOKS as SelectSearchOption[];
-	const history = useHistory();
-	const location = useLocation();
 
 	const [selectedBooks, setSelectedBooks] = useState<SelectSearchOption[]>([]);
 
 	const handleGenerateReadingList = async () => {
-		// TODO: actually generate reading list
-		await setMyList(selectedBooks);
-		if (location.pathname !== "/mylist") {
-			history.push({
-				pathname: "/mylist"
-			});
-		}
+		// tf.loadLayersModel("../assets/models/book_recs.json").then(model => {
+		// 	// @ts-ignore
+		// 	window.model = model;
+		// });
+		// var readingList: SelectSearchOption[] = [];
+		// for (let book of generateReadingList(selectedBooks)) {
+		// 	books.forEach(obj => {
+		// 		if (book === obj.name) {
+		// 			readingList.push(obj);
+		// 			return;
+		// 		}
+		// 	});
+		// }
+		// await setMyList(readingList);
 	};
 
 	const getBooks = async (query: string): Promise<SelectSearchOption[]> => {
@@ -68,9 +109,9 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 	const getClassNames = (key: string): string => {
 		switch (key) {
 			case "input":
-				return "outline-none border-none bg-indigo-100 p-5 text-base md:text-lg w-11/12 md:w-6/12 rounded-md mb-2 focus:ring-2 focus:ring-indigo-300";
+				return "outline-none border-none bg-white p-5 text-greener-darker text-base md:text-lg w-11/12 md:w-7/12 rounded-md mb-2 focus:ring-1 focus:ring-greener shadow-md";
 			case "option":
-				return "bg-white pl-0 pb-1 h-20 w-11/12 md:w-6/12 rounded-md hover:bg-yellow-100 m-auto relative mb-1";
+				return "bg-white pl-0 pb-1 h-20 w-11/12 md:w-6/12 rounded-md hover:bg-greener-lighter m-auto relative mb-1";
 			case "options":
 				return "";
 			case "container":
@@ -109,12 +150,23 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 	};
 
 	return (
-		<div className="text-center bg-indigo-50">
+		<div className="bg-grayer text-center">
 			<BookSelections
 				handleGenerateReadingList={handleGenerateReadingList}
 				setSelectedBooks={setSelectedBooks}
 				selectedBooks={selectedBooks}
 			/>
+			<div className="text-center">
+				<h2 className="text-3xl text-grayest font-bold">
+					Find books you'll enjoy!
+				</h2>
+				<p className="text-xl text-grayest mx-40 my-6">
+					Simply enter a few books you've read and enjoyed recently, and we'll
+					analyze over <strong>10000 books</strong> and{" "}
+					<strong>6 million ratings</strong> to determine some sweet selections
+				</p>
+				{/* <FontAwesomeIcon icon={faSearch} /> */}
+			</div>
 			<SelectSearch
 				options={books.slice(0, 15)}
 				search={true}
@@ -124,14 +176,14 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 				autoComplete={"on"}
 				onChange={onChange}
 				// multiple={true}
-				placeholder="Enter 3-5 books you've read and enjoyed"
+				placeholder="Enter the title or author of a book to start"
 				className={getClassNames}
 				renderOption={renderBook}
 			/>
 
-			<div className="m-auto mt-10 md:mt-20 md:mb-16">
+			{/* <div className="m-auto mt-10 md:mt-20 md:mb-16">
 				<ReaderImg />
-			</div>
+			</div> */}
 		</div>
 	);
 };

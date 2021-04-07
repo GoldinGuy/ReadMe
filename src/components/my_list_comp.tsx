@@ -9,17 +9,17 @@ import {
 
 const MyListComp = ({ myList }: { myList: SelectSearchOption[] }) => {
 	return (
-		<div className="bg-indigo-50 text-center py-10 w-screen ">
+		<div className="bg-greener-50 text-center py-10 w-screen overflow-x-hidden">
 			<div className="pb-10 md:text-lg w-screen">
 				<button
-					className="rounded-md px-6 h-8 bg-indigo-400 text-md md:text-md text-gray-50 m-auto font-bold focus:outline-none focus:border-0 mr-5 self-center"
+					className="rounded-md px-6 h-8 bg-greener-400 text-md md:text-md text-gray-50 m-auto font-bold focus:outline-none focus:border-0 mr-5 self-center"
 					title="Share"
 				>
 					<FontAwesomeIcon icon={faShare} />
 				</button>
 				Your Reading List Has Been Generated!
 				<button
-					className="ml-4 rounded-md px-6 h-8 bg-indigo-400 text-md md:text-md text-gray-50 m-auto font-bold focus:outline-none focus:border-0 mr-5 self-center"
+					className="ml-4 rounded-md px-6 h-8 bg-greener-400 text-md md:text-md text-gray-50 m-auto font-bold focus:outline-none focus:border-0 mr-5 self-center"
 					title="Download"
 				>
 					<FontAwesomeIcon icon={faDownload} />

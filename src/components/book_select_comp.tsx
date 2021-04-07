@@ -20,7 +20,7 @@ const BookSelections = ({
 	};
 
 	return (
-		<div className="mb-8 bg-indigo-300 w-screen flex items-center h-24 overflow-x-hidden">
+		<div className="mb-8 bg-greener-light w-screen flex items-center h-24 overflow-x-hidden shadow-md">
 			{selectedBooks.map((book, index) => {
 				return (
 					<button
@@ -39,7 +39,7 @@ const BookSelections = ({
 			{selectedBooks.length >= NUM_REQUIRED ? (
 				<button
 					onClick={() => handleGenerateReadingList()}
-					className="rounded-md px-6 h-14 bg-indigo-400 text-md md:text-lg text-gray-50 m-auto font-bold float-right focus:outline-none focus:border-0 mr-5 self-center hover:bg-yellow-300"
+					className="rounded-md px-6 h-14 bg-greener-dark text-md md:text-lg text-gray-50 m-auto font-bold float-right focus:outline-none focus:border-0 mr-6 md:mr-10 self-center hover:bg-greener"
 				>
 					Generate Reading List
 				</button>
