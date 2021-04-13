@@ -7,6 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
 import QUOTES from "../utils/quotes";
+import { downloadReadingList } from "../utils/gen";
 
 interface RecBook {
 	title: string;
@@ -23,9 +24,9 @@ const MyListPage = () => {
 
 	return (
 		<div className="bg-greener-50 text-center py-10 w-screen overflow-x-hidden ">
-			<div className="pb-10 text-center md:text-lg w-screen sm:w-10/12 lg:w-9/12 overflow-hidden break-words flex justify-center items-center m-auto">
+			<div className="pb-10 text-center md:text-lg w-screen sm:w-10/12 lg:w-9/12 overflow-hidden break-words flex  items-center m-auto justify-between">
 				<button
-					className="rounded-md px-6 h-8 bg-greener-400 text-md md:text-md text-greener hover:text-greener-dark font-bold focus:outline-none focus:border-0 mr-5 self-center"
+					className="rounded-md h-8 bg-greener-400 text-md md:text-md text-greener hover:text-greener-dark font-bold focus:outline-none focus:border-0 self-center"
 					title="Share"
 				>
 					<FontAwesomeIcon icon={faShare} size={"lg"} />
@@ -35,8 +36,22 @@ const MyListPage = () => {
 				</i>
 				{/* Your Reading List Has Been Generated! */}
 				<button
-					className="ml-4 rounded-md px-6 h-8 bg-greener-400 text-md md:text-md text-greener hover:text-greener-dark font-bold focus:outline-none focus:border-0 mr-5 self-center"
+					className=" rounded-md h-8 bg-greener-400 text-md md:text-md text-greener hover:text-greener-dark font-bold focus:outline-none focus:border-0 self-center"
 					title="Download"
+					onClick={async () => {
+						var readingListString = "";
+						await LIST.map((book: RecBook, idx: number) => {
+							readingListString = readingListString.concat(
+								idx + 1 + `) ${book.title} By: ${book.author}\n`
+							);
+						});
+						console.log(readingListString);
+						downloadReadingList(
+							readingListString,
+							"text/plain",
+							"myReadingList.txt"
+						);
+					}}
 				>
 					<FontAwesomeIcon icon={faDownload} size={"lg"} />
 				</button>

@@ -19,16 +19,11 @@ const HeaderComp = () => {
 						</Link>
 						<div className="flex items-center space-x-1">
 							<div className=" md:inline-flex">
-								<Link
-									to="/mylist"
-									href="#"
-									className="text-grayest btn btn-sm btn-link mr-4"
-								>
-									My List
+								<Link to="/" className="text-grayest btn btn-sm btn-link mr-4">
+									Make A Reading List
 								</Link>
 								<Link
-									to="/"
-									href="#"
+									to="/github"
 									className="text-grayest btn btn-sm btn-link "
 								>
 									How It Works
