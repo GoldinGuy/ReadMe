@@ -55,6 +55,22 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 	const [selectedBooks, setSelectedBooks] = useState<SelectSearchOption[]>([]);
 
 	const handleGenerateReadingList = async () => {
+		const response = await fetch("/fetch_recs", {
+			method: "POST",
+			headers: {
+				Content_Type: "application/json"
+			},
+			body: JSON.stringify({
+				liked_books: selectedBooks,
+				count: 25
+			})
+		});
+
+		if (response.ok) {
+			console.log("Response Worked! ");
+			console.log(JSON.stringify(response.url));
+			console.log(response);
+		}
 		// tf.loadLayersModel("../assets/models/book_recs.json").then(model => {
 		// 	// @ts-ignore
 		// 	window.model = model;
@@ -111,7 +127,7 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 			case "input":
 				return "outline-none border-none bg-white p-5 text-greener-darker text-base md:text-lg w-11/12 md:w-7/12 rounded-md mb-2 focus:ring-1 focus:ring-greener shadow-md";
 			case "option":
-				return "bg-white pl-0 pb-1 h-20 w-11/12 md:w-6/12 rounded-md hover:bg-greener-lighter m-auto relative mb-1";
+				return "bg-white pl-0 pb-1 h-20 w-11/12 md:w-6/12 rounded-md hover:bg-greener-lightest m-auto relative mb-1";
 			case "options":
 				return "";
 			case "container":
@@ -176,7 +192,11 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 				autoComplete={"on"}
 				onChange={onChange}
 				// multiple={true}
-				placeholder="Enter the title or author of a book to start"
+				placeholder={
+					selectedBooks.length === 0
+						? "Enter the title or author of a book to begin"
+						: "Enter the title or author of another book for better predictions"
+				}
 				className={getClassNames}
 				renderOption={renderBook}
 			/>
