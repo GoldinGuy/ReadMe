@@ -19,9 +19,9 @@ const ReaderImg = () => {
 					y2="197.23"
 					gradientUnits="userSpaceOnUse"
 				>
-					<stop offset="0" stop-color="gray" stop-opacity="0.25" />
-					<stop offset="0.54" stop-color="gray" stop-opacity="0.12" />
-					<stop offset="1" stop-color="gray" stop-opacity="0.1" />
+					<stop offset="0" stopColor="gray" stopOpacity="0.25" />
+					<stop offset="0.54" stopColor="gray" stopOpacity="0.12" />
+					<stop offset="1" stopColor="gray" stopOpacity="0.1" />
 				</linearGradient>
 				<linearGradient
 					id="bd5348f2-d6e7-4b10-83c1-a84cbaf770d6"
@@ -56,15 +56,15 @@ const ReaderImg = () => {
 				transform="translate(-60.75 -59.82)"
 				fill="none"
 				stroke="#535461"
-				stroke-miterlimit="10"
+				strokeMiterlimit="10"
 			/>
 			<path
 				d="M960.36,450.81S935,348.7,973.43,276c16.14-30.51,22.55-65.27,17.16-99.36a268.09,268.09,0,0,0-12.14-47.5"
 				transform="translate(-60.75 -59.82)"
 				fill="none"
 				stroke="#535461"
-				stroke-miterlimit="10"
-				stroke-width="2"
+				strokeMiterlimit="10"
+				strokeWidth="2"
 			/>
 			<path
 				d="M1002.4,83.18c-.53,12.36-24.44,47.23-24.44,47.23s-20.84-36.79-20.31-49.15a22.4,22.4,0,0,1,44.75,1.92Z"
@@ -141,8 +141,8 @@ const ReaderImg = () => {
 				transform="translate(-60.75 -59.82)"
 				fill="none"
 				stroke="#535461"
-				stroke-miterlimit="10"
-				stroke-width="2"
+				strokeMiterlimit="10"
+				strokeWidth="2"
 			/>
 			<path
 				d="M1037.34,267.57l-46-10.38S1002.18,305.73,1037.34,267.57Z"
@@ -198,8 +198,8 @@ const ReaderImg = () => {
 				transform="translate(-60.75 -59.82)"
 				fill="none"
 				stroke="#535461"
-				stroke-miterlimit="10"
-				stroke-width="2"
+				strokeMiterlimit="10"
+				strokeWidth="2"
 			/>
 			<path
 				d="M479.16,150.69s9.88,12.92-4.56,32.42-26.34,36-21.53,48.12c0,0,21.78-36.22,39.51-36.73S498.66,172.47,479.16,150.69Z"
@@ -277,8 +277,8 @@ const ReaderImg = () => {
 				transform="translate(-60.75 -59.82)"
 				fill="none"
 				stroke="#000"
-				stroke-miterlimit="10"
-				stroke-width="4"
+				strokeMiterlimit="10"
+				strokeWidth="4"
 				opacity="0.1"
 			/>
 			<path
@@ -286,8 +286,8 @@ const ReaderImg = () => {
 				transform="translate(-60.75 -59.82)"
 				fill="none"
 				stroke="#000"
-				stroke-miterlimit="10"
-				stroke-width="4"
+				strokeMiterlimit="10"
+				strokeWidth="4"
 				opacity="0.1"
 			/>
 			<path
@@ -295,8 +295,8 @@ const ReaderImg = () => {
 				transform="translate(-60.75 -59.82)"
 				fill="none"
 				stroke="#000"
-				stroke-miterlimit="10"
-				stroke-width="4"
+				strokeMiterlimit="10"
+				strokeWidth="4"
 				opacity="0.1"
 			/>
 			<path
@@ -304,8 +304,8 @@ const ReaderImg = () => {
 				transform="translate(-60.75 -59.82)"
 				fill="none"
 				stroke="#000"
-				stroke-miterlimit="10"
-				stroke-width="4"
+				strokeMiterlimit="10"
+				strokeWidth="4"
 				opacity="0.1"
 			/>
 			<path
@@ -313,8 +313,8 @@ const ReaderImg = () => {
 				transform="translate(-60.75 -59.82)"
 				fill="none"
 				stroke="#000"
-				stroke-miterlimit="10"
-				stroke-width="4"
+				strokeMiterlimit="10"
+				strokeWidth="4"
 				opacity="0.1"
 			/>
 			<path
@@ -322,8 +322,8 @@ const ReaderImg = () => {
 				transform="translate(-60.75 -59.82)"
 				fill="none"
 				stroke="#000"
-				stroke-miterlimit="10"
-				stroke-width="4"
+				strokeMiterlimit="10"
+				strokeWidth="4"
 				opacity="0.1"
 			/>
 			<path
@@ -331,8 +331,8 @@ const ReaderImg = () => {
 				transform="translate(-60.75 -59.82)"
 				fill="none"
 				stroke="#000"
-				stroke-miterlimit="10"
-				stroke-width="4"
+				strokeMiterlimit="10"
+				strokeWidth="4"
 				opacity="0.1"
 			/>
 			<path
@@ -340,8 +340,8 @@ const ReaderImg = () => {
 				transform="translate(-60.75 -59.82)"
 				fill="none"
 				stroke="#000"
-				stroke-miterlimit="10"
-				stroke-width="4"
+				strokeMiterlimit="10"
+				strokeWidth="4"
 				opacity="0.1"
 			/>
 			<path
