@@ -2,12 +2,8 @@ import React, { useState } from "react";
 import SelectSearch, { SelectSearchOption } from "react-select-search";
 import ReaderImg from "./img_comp";
 import BookSelections from "./book_select_comp";
-// import * as tf from "@tensorflow/tfjs";
-// import book_idx from "../assets/weights/book_idx.json";
-// import idx_book from "../assets/weights/idx_book.json";
-// import weights from "../assets/weights/book_weights.json";
-import BOOKS from "../assets/new_books.json";
-import { multiply } from "mathjs";
+
+import BOOKS from "../assets/book_data/final_books.json";
 
 // function shuffle(array: SelectSearchOption[]) {
 // 	for (let i = array.length - 1; i > 0; i--) {
@@ -55,22 +51,30 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 	const [selectedBooks, setSelectedBooks] = useState<SelectSearchOption[]>([]);
 
 	const handleGenerateReadingList = async () => {
-		const response = await fetch("/fetch_recs", {
+		const liked_books: string[] = [];
+		selectedBooks.forEach(book => {
+			liked_books.push(book.name);
+		});
+		const response = await fetch("http://127.0.0.1:5000/fetch_recs", {
 			method: "POST",
 			headers: {
 				Content_Type: "application/json"
 			},
 			body: JSON.stringify({
-				liked_books: selectedBooks,
+				liked_books: liked_books,
 				count: 25
 			})
-		});
+		})
+			.then(response => {
+				if (response.ok) {
+					console.log(JSON.stringify(response.url));
+					return response.json();
+				}
+			})
+			.then(data => {
+				console.log(data);
+			});
 
-		if (response.ok) {
-			console.log("Response Worked! ");
-			console.log(JSON.stringify(response.url));
-			console.log(response);
-		}
 		// tf.loadLayersModel("../assets/models/book_recs.json").then(model => {
 		// 	// @ts-ignore
 		// 	window.model = model;
@@ -143,7 +147,7 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 		if (options.length > 0) {
 			return books
 				.filter(book => {
-					if (book.name.length > 0) {
+					if (book.name?.length > 0) {
 						return (
 							book.name.toLowerCase().includes(query.toLowerCase()) &&
 							!selectedBooks.includes(book)

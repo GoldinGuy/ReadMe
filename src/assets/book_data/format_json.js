@@ -1,9 +1,9 @@
-var book_list = require("./book_list.json");
+// var book_list = require("./book_list.json");
 var fs = require("fs");
 // var ndjsonToJsonText = require("ndjson-to-json-text");
 // var ndjson = fs.readFileSync("./found_books_filtered.ndjson", "utf8");
-// var csv = fs.readFileSync("./books.csv", "utf8");
-var csvOps = require("./csv_options.json");
+var csv = fs.readFileSync("./books.csv", "utf8");
+// var csvOps = require("./csv_options.json");
 
 const csvToJson = (str, headerList, quotechar = '"', delimiter = ",") => {
 	const cutlast = (_, i, a) => i < a.length - 1;
@@ -30,9 +30,22 @@ const csvToJson = (str, headerList, quotechar = '"', delimiter = ",") => {
 	return list;
 };
 
-// var csvJson = csvToJson(csv);
+var csvJson = csvToJson(csv);
 
-var books = [];
+var book_list = [];
+
+for (let csv_obj of csvJson) {
+	book_list.push({
+		name: csv_obj["title,"],
+		value: csv_obj["best_book_id,"] ?? "",
+		photo: csv_obj["small_image_url"] ?? "",
+		type:
+			`${csv_obj["authors,"]},`.substring(
+				0,
+				(`${csv_obj["authors,"]},` ?? "").indexOf(",")
+			) ?? ""
+	});
+}
 
 // var json = ndjson.toString().trim().split("\n").map(JSON.parse);
 
@@ -67,53 +80,53 @@ var books = [];
 // }
 // }
 
-var book_names = [];
+// var book_names = [];
 
-for (let obj of book_list) {
-	if (!book_names.includes(obj["name"])) {
-		let book = {
-			name: obj["name"],
-			value: obj["value"],
-			photo: "",
-			type: obj["type"]
-		};
-		// console.log(book);
-		for (let goodObj of csvOps) {
-			let objname = book.name.toLowerCase();
-			if (objname.indexOf("(") !== -1) {
-				objname = objname.substring(0, objname.indexOf("("));
-			}
-			if (objname.trim() === goodObj["name"].toString().toLowerCase().trim()) {
-				book["photo"] = goodObj["photo"];
-				book["type"] = goodObj["type"];
-				book["value"] = goodObj["value"];
-				break;
-			}
-		}
-		if (book["photo"].length === 0) {
-			book["photo"] =
-				"https://s.gr-assets.com/assets/nophoto/book/50x75-a91bf249278a81aabab721ef782c4a74.png";
-		}
+// for (let obj of book_list) {
+// 	if (!book_names.includes(obj["name"])) {
+// 		let book = {
+// 			name: obj["name"],
+// 			value: obj["value"],
+// 			photo: "",
+// 			type: obj["type"]
+// 		};
+// 		// console.log(book);
+// 		for (let goodObj of csvOps) {
+// 			let objname = book.name.toLowerCase();
+// 			if (objname.indexOf("(") !== -1) {
+// 				objname = objname.substring(0, objname.indexOf("("));
+// 			}
+// 			if (objname.trim() === goodObj["name"].toString().toLowerCase().trim()) {
+// 				book["photo"] = goodObj["photo"];
+// 				book["type"] = goodObj["type"];
+// 				book["value"] = goodObj["value"];
+// 				break;
+// 			}
+// 		}
+// 		if (book["photo"].length === 0) {
+// 			book["photo"] =
+// 				"https://s.gr-assets.com/assets/nophoto/book/50x75-a91bf249278a81aabab721ef782c4a74.png";
+// 		}
 
-		books.push(book);
-		book_names.push(book.name);
-	}
-}
-
-fs.writeFileSync(
-	"new_books.json",
-	JSON.stringify(books, null, 4),
-	function (err, file) {
-		if (err) throw err;
-		console.log("Saved!");
-	}
-);
+// 		books.push(book);
+// 		book_names.push(book.name);
+// 	}
+// }
 
 // fs.writeFileSync(
-// 	"book_list.json",
-// 	JSON.stringify(book_list, null, 4),
+// 	"new_books.json",
+// 	JSON.stringify(books, null, 4),
 // 	function (err, file) {
 // 		if (err) throw err;
 // 		console.log("Saved!");
 // 	}
 // );
+
+fs.writeFileSync(
+	"final_books.json",
+	JSON.stringify(book_list, null, 4),
+	function (err, file) {
+		if (err) throw err;
+		console.log("Saved!");
+	}
+);
