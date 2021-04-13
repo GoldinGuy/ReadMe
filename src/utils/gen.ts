@@ -1,6 +1,6 @@
 import { SelectSearchOption } from "react-select-search";
 
-export function shuffle(array: SelectSearchOption[]) {
+export function shuffle(array: SelectSearchOption[]): SelectSearchOption[] {
 	for (let i = array.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1));
 		[array[i], array[j]] = [array[j], array[i]];
@@ -13,7 +13,7 @@ export function downloadReadingList(
 	text: string,
 	fileType: string,
 	fileName: string
-) {
+): void {
 	var blob = new Blob([text], { type: fileType });
 
 	var a = document.createElement("a");
@@ -27,4 +27,13 @@ export function downloadReadingList(
 	setTimeout(function () {
 		URL.revokeObjectURL(a.href);
 	}, 1500);
+}
+
+export function sentenceCase(text: string): string {
+	var newString = text
+		.toLowerCase()
+		.replace(/(^\s*\w|[\.\!\?]\s*\w)/g, function (c) {
+			return c.toUpperCase();
+		});
+	return newString;
 }

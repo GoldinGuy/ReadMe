@@ -7,7 +7,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
 import QUOTES from "../utils/quotes";
-import { downloadReadingList } from "../utils/gen";
+import { downloadReadingList, sentenceCase } from "../utils/gen";
+
+import {
+	Accordion,
+	AccordionItem,
+	AccordionItemHeading,
+	AccordionItemButton,
+	AccordionItemPanel
+} from "react-accessible-accordion";
 
 interface RecBook {
 	title: string;
@@ -16,6 +24,7 @@ interface RecBook {
 	url: string;
 	tags: string;
 	popular_shelves: string;
+	description: string;
 }
 
 const MyListPage = () => {
@@ -58,52 +67,61 @@ const MyListPage = () => {
 					<span className="block">Download</span>
 				</button>
 			</div>
-			{LIST.map((book: RecBook, idx: number) => {
-				return (
-					<button
-						className="bg-white pl-0 h-20 w-11/12 sm:w-9/12 lg:w-7/12 rounded-md hover:bg-greener-lightest m-auto relative mb-1 focus:outline-none focus:border-0 flex justify-between items-center text-grayest"
-						key={idx + "-btn"}
-					>
-						<img
-							key={book.tags[0] + "-img-" + book.title}
-							alt="book-cover"
-							className="h-20 w-14 rounded-md "
-							src={book.image_url}
-						/>
-						<span className="px-6" key={idx + "-span"}>
-							<span className="flex-col">
-								<a
-									href={book.url}
-									target="_blank"
-									rel="noreferrer"
-									className="text-base md:text-lg "
-									key={book.tags[0] + "-title-" + book.title}
+			<Accordion allowZeroExpanded={true}>
+				{LIST.map((book: RecBook, idx: number) => {
+					return (
+						<AccordionItem className="bg-white w-11/12 sm:w-9/12 lg:w-7/12 m-auto relative mb-1 rounded-md">
+							<AccordionItemHeading>
+								<AccordionItemButton
+									className="pl-0 h-20 hover:bg-greener-lightest focus:outline-none focus:border-0 flex justify-between items-center text-grayest"
+									key={idx + "-header-btn"}
 								>
-									{book.title}
-								</a>
-								<span
-									className="block text-sm"
-									key={book.title + "-author-" + book.title}
-								>
-									{book.author}
-								</span>
-							</span>
-						</span>
+									<img
+										key={book.tags[0] + "-img-" + book.title}
+										alt="book-cover"
+										className="h-20 w-14 rounded-md "
+										src={book.image_url}
+									/>
+									<span className="px-6" key={idx + "-span"}>
+										<span className="flex-col">
+											<span
+												className="text-base md:text-lg "
+												key={book.tags[0] + "-title-" + book.title}
+											>
+												{book.title}
+											</span>
+											<span
+												className="block text-sm"
+												key={book.title + "-author-" + book.title}
+											>
+												{book.author}
+											</span>
+										</span>
+									</span>
 
-						<a
-							className="mr-3 text-grayest"
-							href={book.url}
-							/* 	TODO: Amazon href={`https://www.amazon.com/books/s?k=${encodeURIComponent(
+									<a
+										className="mr-3 text-grayest"
+										href={book.url}
+										/* 	TODO: Amazon href={`https://www.amazon.com/books/s?k=${encodeURIComponent(
 								book.title
 							)}+book`} */
-							target="_blank"
-							rel="noreferrer"
-						>
-							<FontAwesomeIcon icon={faExternalLinkAlt} size={"lg"} />
-						</a>
-					</button>
-				);
-			})}
+										target="_blank"
+										rel="noreferrer"
+									>
+										<FontAwesomeIcon icon={faExternalLinkAlt} size={"lg"} />
+									</a>
+								</AccordionItemButton>
+							</AccordionItemHeading>
+							<AccordionItemPanel
+								className="p-8 focus:outline-none focus:border-0 text-grayest"
+								key={idx + "-item-panel"}
+							>
+								{sentenceCase(book.description)}
+							</AccordionItemPanel>
+						</AccordionItem>
+					);
+				})}
+			</Accordion>
 		</div>
 	);
 };
