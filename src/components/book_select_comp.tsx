@@ -1,6 +1,6 @@
 import { SelectSearchOption } from "react-select-search";
 
-const NUM_REQUIRED = 3;
+const NUM_REQUIRED = 1; // 3
 
 const BookSelections = ({
 	selectedBooks,
@@ -21,7 +21,7 @@ const BookSelections = ({
 
 	return (
 		<div className="mb-8 bg-greener-light w-screen flex items-center h-24 overflow-x-hidden shadow-md">
-			{selectedBooks.map((book, index) => {
+			{selectedBooks.map((book, idx) => {
 				return (
 					<button
 						className="h-full border-none outline-none focus:outline-none focus:border-0 "
