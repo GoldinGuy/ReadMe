@@ -2,7 +2,7 @@ import { SelectSearchOption } from "react-select-search";
 
 const NUM_REQUIRED = 1; // 3
 
-const BookSelections = ({
+const BookPanel = ({
 	selectedBooks,
 	setSelectedBooks,
 	handleGenerateReadingList
@@ -47,4 +47,4 @@ const BookSelections = ({
 		</div>
 	);
 };
-export default BookSelections;
+export default BookPanel;

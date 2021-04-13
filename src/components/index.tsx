@@ -1,5 +1,5 @@
-import HeaderComp from "./header_comp";
-import SearchComp from "./search_comp";
-import MyListComp from "./my_list_comp";
+import Header from "./Header";
+import BookPanel from "./BookPanel";
+import ReadImg from './ReadImg'
 
-export { HeaderComp, SearchComp, MyListComp };
+export { Header, BookPanel, ReadImg };

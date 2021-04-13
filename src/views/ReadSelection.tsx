@@ -1,23 +1,12 @@
 import React, { useState } from "react";
 import SelectSearch, { SelectSearchOption } from "react-select-search";
-import ReaderImg from "./img_comp";
-import BookSelections from "./book_select_comp";
+import BOOKS from "../assets/book_data/final_books.json";
+import { BookPanel, ReadImg } from "../components";
 import { useHistory } from "react-router-dom";
 
-import BOOKS from "../assets/book_data/final_books.json";
-
-// function shuffle(array: SelectSearchOption[]) {
-// 	for (let i = array.length - 1; i > 0; i--) {
-// 		const j = Math.floor(Math.random() * (i + 1));
-// 		[array[i], array[j]] = [array[j], array[i]];
-// 	}
-// 	return array;
-// }
-
-const SearchComp = ({ setMyList }: { setMyList: Function }) => {
-	const books = BOOKS as SelectSearchOption[];
+const ReadSelectionPage = () => {
 	const history = useHistory();
-
+	const books = BOOKS as SelectSearchOption[];
 	const [selectedBooks, setSelectedBooks] = useState<SelectSearchOption[]>([]);
 
 	const handleGenerateReadingList = async () => {
@@ -135,7 +124,7 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 
 	return (
 		<div className="bg-grayer text-center">
-			<BookSelections
+			<BookPanel
 				handleGenerateReadingList={handleGenerateReadingList}
 				setSelectedBooks={setSelectedBooks}
 				selectedBooks={selectedBooks}
@@ -149,7 +138,6 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 					analyze over <strong>10000 books</strong> and{" "}
 					<strong>14 million ratings</strong> to determine some sweet selections
 				</p>
-				{/* <FontAwesomeIcon icon={faSearch} /> */}
 			</div>
 			<SelectSearch
 				options={books.slice(0, 15)}
@@ -159,7 +147,6 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 				filterOptions={filterOptions}
 				autoComplete={"on"}
 				onChange={onChange}
-				// multiple={true}
 				placeholder={
 					selectedBooks.length === 0
 						? "Enter the title or author of a book to begin"
@@ -170,9 +157,9 @@ const SearchComp = ({ setMyList }: { setMyList: Function }) => {
 			/>
 
 			<div className="m-auto mt-10 ">
-				<ReaderImg />
+				<ReadImg />
 			</div>
 		</div>
 	);
 };
-export default SearchComp;
+export default ReadSelectionPage;

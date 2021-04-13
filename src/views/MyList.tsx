@@ -6,6 +6,7 @@ import {
 	faShare
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
+import QUOTES from "../utils/quotes";
 
 interface RecBook {
 	title: string;
@@ -16,33 +17,37 @@ interface RecBook {
 	popular_shelves: string;
 }
 
-const MyListComp = () => {
+const MyListPage = () => {
 	const location = useLocation();
 	const LIST = location.state.list;
 
-	console.log("LIST" + JSON.stringify(LIST));
-
 	return (
-		<div className="bg-greener-50 text-center py-10 w-screen overflow-x-hidden">
-			<div className="pb-10 md:text-lg w-screen">
+		<div className="bg-greener-50 text-center py-10 w-screen overflow-x-hidden ">
+			<div className="pb-10 text-center md:text-lg w-screen sm:w-10/12 lg:w-9/12 overflow-hidden break-words flex justify-center items-center m-auto">
 				<button
-					className="rounded-md px-6 h-8 bg-greener-400 text-md md:text-md text-gray-50 m-auto font-bold focus:outline-none focus:border-0 mr-5 self-center"
+					className="rounded-md px-6 h-8 bg-greener-400 text-md md:text-md text-greener hover:text-greener-dark font-bold focus:outline-none focus:border-0 mr-5 self-center"
 					title="Share"
 				>
-					<FontAwesomeIcon icon={faShare} />
+					<FontAwesomeIcon icon={faShare} size={"lg"} />
 				</button>
-				Your Reading List Has Been Generated!
+				<i className="text-center">
+					{QUOTES[Math.floor(Math.random() * QUOTES.length)]}
+				</i>
+				{/* Your Reading List Has Been Generated! */}
 				<button
-					className="ml-4 rounded-md px-6 h-8 bg-greener-400 text-md md:text-md text-gray-50 m-auto font-bold focus:outline-none focus:border-0 mr-5 self-center"
+					className="ml-4 rounded-md px-6 h-8 bg-greener-400 text-md md:text-md text-greener hover:text-greener-dark font-bold focus:outline-none focus:border-0 mr-5 self-center"
 					title="Download"
 				>
-					<FontAwesomeIcon icon={faDownload} />
+					<FontAwesomeIcon icon={faDownload} size={"lg"} />
 				</button>
 			</div>
 			{LIST.map((book: RecBook, idx: number) => {
 				return (
-					<button className="bg-white pl-0 h-20 w-11/12 md:w-6/12 rounded-md hover:bg-yellow-100 m-auto relative mb-1 focus:outline-none focus:border-0 grid ">
-						<span className="align-middle self-center">
+					<button
+						className="bg-white pl-0 h-20 w-11/12 sm:w-9/12 lg:w-7/12 rounded-md hover:bg-greener-lightest m-auto relative mb-1 focus:outline-none focus:border-0 grid "
+						key={idx + "-btn"}
+					>
+						<span className="align-middle self-center" key={idx + "-span"}>
 							<span className="flex flex-col pl-14 sm:pl-0 self-center">
 								<img
 									key={book.tags[0] + "-img-" + book.title}
@@ -84,4 +89,4 @@ const MyListComp = () => {
 		</div>
 	);
 };
-export default MyListComp;
+export default MyListPage;
