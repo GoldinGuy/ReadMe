@@ -5,7 +5,7 @@ import {
 	faExternalLinkAlt,
 	faShare
 } from "@fortawesome/free-solid-svg-icons";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import QUOTES from "../utils/quotes";
 import { downloadReadingList, sentenceCase } from "../utils/gen";
 
@@ -29,11 +29,18 @@ interface RecBook {
 
 const MyListPage = () => {
 	const location = useLocation();
-	const LIST = location.state.list;
+	const history = useHistory();
+	const LIST = location.state?.list ?? [];
+
+	if (LIST.length <= 0) {
+		history.push({
+			pathname: "/"
+		});
+	}
 
 	return (
 		<div className="bg-greener-50 text-center py-10 w-screen overflow-x-hidden ">
-			<div className="pb-10 text-center md:text-lg w-screen sm:w-10/12 lg:w-9/12 overflow-hidden break-words flex  items-center m-auto justify-between">
+			<div className="pb-10 text-center md:text-lg w-screen sm:w-10/12 lg:w-9/12 overflow-hidden break-words flex  items-center m-auto justify-evenly">
 				<button
 					className="rounded-md h-8 bg-greener-400 text-md md:text-md text-greener hover:text-greener-dark font-bold focus:outline-none focus:border-0 self-center pr-8"
 					title="Share"
@@ -52,7 +59,7 @@ const MyListPage = () => {
 						var readingListString = "";
 						await LIST.map((book: RecBook, idx: number) => {
 							readingListString = readingListString.concat(
-								idx + 1 + `) ${book.title} By: ${book.author}\n`
+								idx + 1 + `) ${book.title} | ${book.author}\n`
 							);
 							return readingListString;
 						});
@@ -68,12 +75,12 @@ const MyListPage = () => {
 				</button>
 			</div>
 			<Accordion allowZeroExpanded={true}>
-				{LIST.map((book: RecBook, idx: number) => {
+				{LIST?.map((book: RecBook, idx: number) => {
 					return (
-						<AccordionItem className="bg-white w-11/12 sm:w-9/12 lg:w-7/12 m-auto relative mb-1 rounded-md">
+						<AccordionItem className="bg-white hover:bg-greener-lightest w-11/12 sm:w-9/12 lg:w-7/12 m-auto relative mb-1 rounded-md">
 							<AccordionItemHeading>
 								<AccordionItemButton
-									className="pl-0 h-20 hover:bg-greener-lightest focus:outline-none focus:border-0 flex justify-between items-center text-grayest"
+									className="pl-0 h-20  focus:outline-none focus:border-0 flex justify-between items-center text-grayest"
 									key={idx + "-header-btn"}
 								>
 									<img

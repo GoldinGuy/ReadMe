@@ -17,26 +17,38 @@ const HeaderComp = () => {
 							/>
 							<strong className="text-greener-dark pl-3 text-lg">ReadMe</strong>
 						</Link>
-						<div className="flex items-center space-x-1">
-							<div className=" md:inline-flex">
-								<Link to="/" className="text-grayest btn btn-sm btn-link mr-4">
-									Make A Reading List
-								</Link>
-								<Link
-									to="/github"
-									className="text-grayest btn btn-sm btn-link "
-								>
-									How It Works
-								</Link>
-								<a
-									href="https://github.com/GoldinGuy/"
-									target="_blank"
-									rel="noreferrer"
-									className="text-greener btn btn-sm btn-link font-bold ml-4"
-								>
-									@GoldinGuy
-								</a>
-							</div>
+						<div className="flex items-center md:inline-flex">
+							<Link to="/" className="text-grayest btn btn-sm btn-link mx-2">
+								New Reading List
+							</Link>
+							<Link
+								to="/github"
+								className="text-grayest btn btn-sm btn-link mx-2"
+							>
+								How It Works
+							</Link>
+							{/* <a
+								href="https://github.com/GoldinGuy/"
+								target="_blank"
+								rel="noreferrer"
+								className="text-greener btn btn-sm btn-link font-bold mx-2"
+							>
+								@GoldinGuy
+							</a> */}
+							{/* <Link
+								to="/"
+								className="ml-4 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gradient-to-r from-greener-lighter to-greener hover:from-greener-lightest hover:to-greener-lighter"
+							>
+								New Reading List
+							</Link> */}
+							<a
+								target="_blank"
+								rel="noreferrer"
+								className="ml-4 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gradient-to-r from-greener to-greener-dark hover:from-greener-lightest hover:to-greener-lighter"
+								href="https://github.com/Catalyst-Video/catalyst-react"
+							>
+								Star ReadMe On GitHub 🌟
+							</a>
 						</div>
 					</div>
 				</header>

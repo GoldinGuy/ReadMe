@@ -11,3 +11,13 @@
 * {
   font-family: Bitter !important;
 }
+
+*::selection {
+    background: #52b788;
+}
+*::-moz-selection {
+  background: #52b788;
+}
+*::-webkit-selection {
+    background: #52b788;
+}
