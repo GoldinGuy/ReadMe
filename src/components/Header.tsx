@@ -35,17 +35,11 @@ const HeaderComp = () => {
 							>
 								@GoldinGuy
 							</a> */}
-							{/* <Link
-								to="/"
-								className="ml-4 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gradient-to-r from-greener-lighter to-greener hover:from-greener-lightest hover:to-greener-lighter"
-							>
-								New Reading List
-							</Link> */}
 							<a
 								target="_blank"
 								rel="noreferrer"
 								className="ml-4 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gradient-to-r from-greener to-greener-dark hover:from-greener-lightest hover:to-greener-lighter"
-								href="https://github.com/Catalyst-Video/catalyst-react"
+								href="https://github.com/GoldinGuy/ReadMe"
 							>
 								Star ReadMe On GitHub 🌟
 							</a>
