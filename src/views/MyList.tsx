@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useHistory } from "react-router-dom";
 import QUOTES from "../utils/quotes";
-import { downloadReadingList, sentenceCase } from "../utils/gen";
+import { boldQuery, downloadReadingList, sentenceCase } from "../utils/gen";
 
 import {
 	Accordion,
@@ -123,7 +123,7 @@ const MyListPage = () => {
 								className="p-8 focus:outline-none focus:border-0 text-grayest"
 								key={idx + "-item-panel"}
 							>
-								{sentenceCase(book.description)}
+								{boldQuery(book.description, book.title)}
 							</AccordionItemPanel>
 						</AccordionItem>
 					);
