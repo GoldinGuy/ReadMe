@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useHistory } from "react-router-dom";
 import QUOTES from "../utils/quotes";
-import { downloadReadingList, sentenceCase } from "../utils/gen";
+import { boldQuery, downloadReadingList } from "../utils/gen";
 
 import {
 	Accordion,
@@ -42,6 +42,9 @@ const MyListPage = () => {
 		<div className="bg-greener-50 text-center py-10 w-screen overflow-x-hidden ">
 			<div className="pb-10 text-center md:text-lg w-screen sm:w-10/12 lg:w-9/12 overflow-hidden break-words flex  items-center m-auto justify-evenly">
 				<button
+					// onClick={() => {
+					// 	Linking.openURL("mailto:support@example.com?subject=SendMail&body=Description");
+					// }}
 					className="rounded-md h-8 bg-greener-400 text-md md:text-md text-greener hover:text-greener-dark font-bold focus:outline-none focus:border-0 self-center pr-8"
 					title="Share"
 				>
@@ -123,7 +126,9 @@ const MyListPage = () => {
 								className="p-8 focus:outline-none focus:border-0 text-grayest"
 								key={idx + "-item-panel"}
 							>
-								{sentenceCase(book.description)}
+								{book.description.length > 1
+									? boldQuery(book.description, book.title)
+									: "No description provided."}
 							</AccordionItemPanel>
 						</AccordionItem>
 					);

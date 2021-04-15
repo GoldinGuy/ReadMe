@@ -14,7 +14,8 @@ const ReadSelectionPage = () => {
 		selectedBooks.forEach(book => {
 			liked_books.push(book.name);
 		});
-		await fetch("http://127.0.0.1:5000/fetch_recs", {
+		// http:127.0.0.1:5000/
+		await fetch("https://readme-api.herokuapp.com/fetch_recs", {
 			method: "POST",
 			headers: {
 				Content_Type: "application/json"
@@ -31,7 +32,7 @@ const ReadSelectionPage = () => {
 				}
 			})
 			.then(async data => {
-				console.log(data);
+				// console.log(data);
 				history.push({
 					pathname: "/mylist",
 					state: { list: data }
@@ -118,7 +119,7 @@ const ReadSelectionPage = () => {
 		var newValue = books.find(book => book.value === value);
 		if (newValue !== undefined && !selectedBooks.includes(newValue)) {
 			setSelectedBooks([...selectedBooks, newValue]);
-			console.log(selectedBooks);
+			// console.log(selectedBooks);
 		}
 	};
 
