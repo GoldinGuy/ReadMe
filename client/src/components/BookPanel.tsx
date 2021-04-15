@@ -26,12 +26,14 @@ const BookPanel = ({
 					<button
 						className="h-full border-none outline-none focus:outline-none focus:border-0 "
 						onClick={() => removeSelectedBook(book)}
+						key={book.name + "-bookpanel"}
 					>
 						<img
 							src={book.photo}
 							alt="book-cover"
 							className="h-full "
 							title={book.name}
+							key={book.name + "-bookimg"}
 						/>
 					</button>
 				);

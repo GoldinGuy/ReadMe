@@ -1,17 +1,41 @@
-from flask import Blueprint, jsonify, request
+from flask import Flask, Blueprint, jsonify, request
+from flask_cors import CORS
+from flask_restful import Resource, Api
 import pandas as pd
 import numpy as np
 
-main = Blueprint('main', __name__)
+app = Flask(__name__)
+
+api = Api(app)
+CORS(app)
+
+
+class status(Resource):
+    def get(self):
+        try:
+            return {'data': 'Api live'}
+        except:
+            return {'data': 'An error occurred when fetching Api'}
+
+
+api.add_resource(status, '/')
+
 print("App starting")
 
+if __name__ == "__main__":
+    app.run()
+
+# load in book data & models
 readme_recs_m = np.load('assets/readme_m.npy')
 print("Recs model loaded")
 
 books = pd.read_pickle('assets/books.pkl')
 print("Books df loaded")
 
+# generate mappings of book titles and ids
 indices = pd.Series(books.index, index=books['title']).drop_duplicates()
+
+# generate book recommendations
 
 
 def make_book_recs(user_map, num, user_matrix):
@@ -31,6 +55,7 @@ def make_book_recs(user_map, num, user_matrix):
     return top_recs
 
 
+# create new user matrix
 def create_new_user(liked_books):
     # map user to vector
     user_matrix = np.zeros((10000), dtype=np.int)
@@ -41,8 +66,8 @@ def create_new_user(liked_books):
     return user_map, user_matrix
 
 
-@main.route('/fetch_recs', methods=['POST'])
-# on request from React app, attempt to generate reading suggestions
+# on POST request from React app, attempt to generate reading suggestions
+@app.route('/fetch_recs', methods=['POST'])
 def fetch_recs():
     print("Fetching Recommendations")
     try:

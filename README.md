@@ -97,7 +97,7 @@ npm start
 To build the Flask app, navigate to the `api` directory and run the following commands:
 
 ```
-    export FLASK_APP=__init__.py
+    export FLASK_APP=app.py
     flask run
 ```
 

@@ -1,9 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+	faClipboard,
 	faDownload,
-	faExternalLinkAlt,
-	faShare
+	faExternalLinkAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useHistory } from "react-router-dom";
 import QUOTES from "../utils/quotes";
@@ -38,18 +38,36 @@ const MyListPage = () => {
 		});
 	}
 
+	const makeReadingListString = async () => {
+		var readingListString = "";
+		await LIST.map((book: RecBook, idx: number) => {
+			readingListString = readingListString.concat(
+				idx + 1 + `) ${book.title} | ${book.author}\n`
+			);
+			return readingListString;
+		});
+		return readingListString;
+	};
+
 	return (
 		<div className="bg-greener-50 text-center py-10 w-screen overflow-x-hidden ">
-			<div className="pb-10 text-center md:text-lg w-screen sm:w-10/12 lg:w-9/12 overflow-hidden break-words flex  items-center m-auto justify-evenly">
+			<div className="pb-10 text-center md:text-lg w-screen sm:w-10/12 lg:w-9/12 overflow-hidden break-words   items-center m-auto justify-evenly hidden sm:flex">
 				<button
-					// onClick={() => {
-					// 	Linking.openURL("mailto:support@example.com?subject=SendMail&body=Description");
-					// }}
+					onClick={async () => {
+						var copyText = await makeReadingListString();
+						let input = document.createElement("input");
+						input.setAttribute("type", "text");
+						input.value = copyText;
+						document.body.appendChild(input);
+						input.select();
+						document.execCommand("copy");
+						document.body.removeChild(input);
+					}}
 					className="rounded-md h-8 bg-greener-400 text-md md:text-md text-greener hover:text-greener-dark font-bold focus:outline-none focus:border-0 self-center pr-8"
-					title="Share"
+					title="Copy"
 				>
-					<FontAwesomeIcon icon={faShare} size={"lg"} />
-					<span className="block">Share</span>
+					<FontAwesomeIcon icon={faClipboard} size={"lg"} />
+					<span className="block">Copy</span>
 				</button>
 				<i className="text-center font-semibold text-grayest">
 					{QUOTES[Math.floor(Math.random() * QUOTES.length)]}
@@ -59,13 +77,7 @@ const MyListPage = () => {
 					className="pl-8 rounded-md h-8 bg-greener-400 text-md md:text-md text-greener hover:text-greener-dark font-bold focus:outline-none focus:border-0 self-center"
 					title="Download"
 					onClick={async () => {
-						var readingListString = "";
-						await LIST.map((book: RecBook, idx: number) => {
-							readingListString = readingListString.concat(
-								idx + 1 + `) ${book.title} | ${book.author}\n`
-							);
-							return readingListString;
-						});
+						var readingListString = await makeReadingListString();
 						downloadReadingList(
 							readingListString,
 							"text/plain",
@@ -77,10 +89,13 @@ const MyListPage = () => {
 					<span className="block">Download</span>
 				</button>
 			</div>
-			<Accordion allowZeroExpanded={true}>
+			<Accordion allowZeroExpanded={true} preExpanded={["0"]}>
 				{LIST?.map((book: RecBook, idx: number) => {
 					return (
-						<AccordionItem className="bg-white hover:bg-greener-lightest w-11/12 sm:w-9/12 lg:w-7/12 m-auto relative mb-1 rounded-md">
+						<AccordionItem
+							className="bg-white hover:bg-greener-lightest w-11/12 sm:w-9/12 lg:w-7/12 m-auto relative mb-1 rounded-md"
+							uuid={idx.toString()}
+						>
 							<AccordionItemHeading>
 								<AccordionItemButton
 									className="pl-0 h-20  focus:outline-none focus:border-0 flex justify-between items-center text-grayest"

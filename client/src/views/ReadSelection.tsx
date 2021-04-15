@@ -3,18 +3,21 @@ import SelectSearch, { SelectSearchOption } from "react-select-search";
 import BOOKS from "../assets/book_data/final_books.json";
 import { BookPanel, ReadImg } from "../components";
 import { useHistory } from "react-router-dom";
+import PropagateLoader from "react-spinners/PropagateLoader";
 
 const ReadSelectionPage = () => {
 	const history = useHistory();
 	const books = BOOKS as SelectSearchOption[];
 	const [selectedBooks, setSelectedBooks] = useState<SelectSearchOption[]>([]);
+	const [loading, setLoading] = useState(false);
 
 	const handleGenerateReadingList = async () => {
+		setLoading(true);
 		const liked_books: string[] = [];
 		selectedBooks.forEach(book => {
 			liked_books.push(book.name);
 		});
-		// http:127.0.0.1:5000/
+		// http://127.0.0.1:5000/
 		await fetch("https://readme-api.herokuapp.com/fetch_recs", {
 			method: "POST",
 			headers: {
@@ -32,6 +35,7 @@ const ReadSelectionPage = () => {
 				}
 			})
 			.then(async data => {
+				setLoading(false);
 				// console.log(data);
 				history.push({
 					pathname: "/mylist",
@@ -57,8 +61,11 @@ const ReadSelectionPage = () => {
 				type="button"
 				key={option.name + "-but"}
 			>
-				<span className="align-middle">
-					<span className="flex flex-col pl-14 sm:pl-4">
+				<span className="align-middle" key={option.name + "-span"}>
+					<span
+						className="flex flex-col pl-14 sm:pl-4"
+						key={option.name + "-span2"}
+					>
 						<img
 							key={option.name + "-img"}
 							alt="book-cover"
@@ -86,8 +93,6 @@ const ReadSelectionPage = () => {
 				return "outline-none border-none bg-white p-5 text-greener-darker text-base  md:text-lg w-11/12 sm:w-9/12 lg:w-7/12 rounded-md mb-2 focus:ring-1 focus:ring-greener shadow-md";
 			case "option":
 				return "bg-white pl-0 pb-1 h-20 w-11/12 sm:w-9/12 lg:w-7/12 xl:w-6/12 rounded-md hover:bg-greener-lightest m-auto relative mb-1";
-			// case "options":
-			// 	return "";
 			case "container":
 				return "box-border";
 			default:
@@ -124,41 +129,48 @@ const ReadSelectionPage = () => {
 	};
 
 	return (
-		<div className="bg-grayer text-center">
+		<div className="bg-grayer text-center m-auto">
 			<BookPanel
 				handleGenerateReadingList={handleGenerateReadingList}
 				setSelectedBooks={setSelectedBooks}
 				selectedBooks={selectedBooks}
 			/>
-			<div className="text-center">
-				<h2 className="text-3xl text-grayest font-bold">
-					Find books you'll enjoy!
-				</h2>
-				<p className="text-xl text-grayest mx-8 sm:mx-28 md:mx-40 my-6">
-					Simply enter a few books you've read and enjoyed recently, and we'll
-					analyze over <strong>10000 books</strong> and{" "}
-					<strong>14 million ratings</strong> to determine some sweet selections
-				</p>
-			</div>
-			<SelectSearch
-				options={books.slice(0, 15)}
-				search={true}
-				getOptions={getBooks}
-				autoFocus={true}
-				filterOptions={filterOptions}
-				autoComplete={"on"}
-				onChange={onChange}
-				placeholder={
-					selectedBooks.length === 0
-						? "Enter the title or author of a book to begin"
-						: "Enter the title or author of another book for better predictions"
-				}
-				className={getClassNames}
-				renderOption={renderBook}
-			/>
-
+			{!loading && (
+				<>
+					<div className="text-center">
+						<h2 className="text-3xl text-grayest font-bold">
+							Find books you'll enjoy!
+						</h2>
+						<p className="text-xl text-grayest mx-8 sm:mx-28 md:mx-40 my-6">
+							Simply enter a few books you've read and enjoyed recently, and
+							we'll analyze over <strong>10000 books</strong> and{" "}
+							<strong>14 million ratings</strong> to determine some sweet
+							selections
+						</p>
+					</div>
+					<SelectSearch
+						options={books.slice(0, 15) ?? []}
+						search={true}
+						getOptions={getBooks}
+						autoFocus={true}
+						filterOptions={filterOptions}
+						autoComplete={"on"}
+						onChange={onChange}
+						placeholder={
+							selectedBooks.length === 0
+								? "Enter the title or author of a book to begin"
+								: "Enter the title or author of another book for better predictions"
+						}
+						className={getClassNames}
+						renderOption={renderBook}
+					/>
+				</>
+			)}
 			<div className="m-auto mt-10 ">
 				<ReadImg />
+			</div>
+			<div className="m-auto mt-10 ">
+				<PropagateLoader color={"#52b788"} loading={loading} size={25} />
 			</div>
 		</div>
 	);

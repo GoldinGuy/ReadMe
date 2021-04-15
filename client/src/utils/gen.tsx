@@ -29,24 +29,9 @@ export function downloadReadingList(
 	}, 1500);
 }
 
-export function sentenceCase(text: string, title: string): string {
-	var newString = text
-		.replaceAll("(?i)\\Q" + title + "\\E", c => {
-			return c.toUpperCase();
-		})
-		.replaceAll(".", ". ")
-		.replaceAll("  ", " ");
-	/* text
-		.toLowerCase()
-		.replace(/(^\s*\w|[\.\!\?]\s*\w)/g, function (c) {
-			return c.toUpperCase();
-		}) */
-
-	return newString;
-}
-
 export function boldQuery(str: string, query: string) {
 	const cleanStr = str.replaceAll(".", ". ").replaceAll("  ", " ");
+
 	const n = cleanStr.toUpperCase();
 	const q = query.toUpperCase();
 	const x = n.indexOf(q);
