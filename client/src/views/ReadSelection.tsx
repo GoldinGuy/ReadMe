@@ -31,7 +31,7 @@ const ReadSelectionPage = () => {
 				}
 			})
 			.then(async data => {
-				console.log(data);
+				// console.log(data);
 				history.push({
 					pathname: "/mylist",
 					state: { list: data }
@@ -118,7 +118,7 @@ const ReadSelectionPage = () => {
 		var newValue = books.find(book => book.value === value);
 		if (newValue !== undefined && !selectedBooks.includes(newValue)) {
 			setSelectedBooks([...selectedBooks, newValue]);
-			console.log(selectedBooks);
+			// console.log(selectedBooks);
 		}
 	};
 
