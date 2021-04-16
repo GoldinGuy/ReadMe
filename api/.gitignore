@@ -1,2 +1,4 @@
 .env
+
+# for now until git LFS limit resets
 assets/

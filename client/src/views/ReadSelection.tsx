@@ -108,7 +108,8 @@ const ReadSelectionPage = () => {
 				.filter(book => {
 					if (book.name?.length > 0) {
 						return (
-							book.name.toLowerCase().includes(query.toLowerCase()) &&
+							(book.name.toLowerCase().includes(query.toLowerCase()) ||
+								book.type?.toLowerCase().includes(query.toLowerCase())) &&
 							!selectedBooks.includes(book)
 						);
 					}

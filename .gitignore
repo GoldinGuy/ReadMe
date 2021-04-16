@@ -1,5 +1,16 @@
 .env
 unused/
+*.gz
+
+# for now until git LFS limit resets
 data/
 models/
 pickled/
+
+
+# models that are too large (even for Git LFS)
+models/feature_m.npz
+models/ratings_combined.npz
+models/readme_m.npy
+pickled/knn.pkl
+pickled/books.pkl
