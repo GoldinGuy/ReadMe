@@ -10,38 +10,46 @@ const ReadSelectionPage = () => {
 	const books = BOOKS as SelectSearchOption[];
 	const [selectedBooks, setSelectedBooks] = useState<SelectSearchOption[]>([]);
 	const [loading, setLoading] = useState(false);
+	let attemptCounter = 0;
 
 	const handleGenerateReadingList = async () => {
-		setLoading(true);
-		const liked_books: string[] = [];
-		selectedBooks.forEach(book => {
-			liked_books.push(book.name);
-		});
-		// http://127.0.0.1:5000/
-		await fetch("https://readme-api.herokuapp.com/fetch_recs", {
-			method: "POST",
-			headers: {
-				Content_Type: "application/json"
-			},
-			body: JSON.stringify({
-				liked_books: liked_books,
-				count: 25
-			})
-		})
-			.then(response => {
-				if (response.ok) {
-					console.log(JSON.stringify(response.url));
-					return response.json();
-				}
-			})
-			.then(async data => {
-				setLoading(false);
-				// console.log(data);
-				history.push({
-					pathname: "/mylist",
-					state: { list: data }
-				});
+		attemptCounter += 1;
+		if (attemptCounter < 3) {
+			setLoading(true);
+			const liked_books: string[] = [];
+			selectedBooks.forEach(book => {
+				liked_books.push(book.name);
 			});
+			// http://127.0.0.1:5000/
+			await fetch("https://readme-api.herokuapp.com/fetch_recs", {
+				method: "POST",
+				headers: {
+					Content_Type: "application/json"
+				},
+				body: JSON.stringify({
+					liked_books: liked_books,
+					count: 25
+				})
+			}).then(response => {
+					if (response.ok) {
+						console.log(JSON.stringify(response.url));
+						return response.json();
+					}
+				}).catch(error => {
+					console.log(error);
+					handleGenerateReadingList();
+				}).then(async data => {
+					setLoading(false);
+					// console.log(data);
+					history.push({
+						pathname: "/mylist",
+						state: { list: data }
+					});
+				}).catch(error => {
+					console.log(error);
+					handleGenerateReadingList()
+				});
+		}
 	};
 
 	const getBooks = async (query: string): Promise<SelectSearchOption[]> => {
